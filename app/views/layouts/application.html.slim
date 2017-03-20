@@ -1,0 +1,12 @@
+html
+  head
+    title Agile-Board
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    nav.navbar.agile-board-navbar
+      .container-fluid
+        .navbar-header
+          a.navbar-brand href=root_path  AgileBoard
+    .body
+      = yield

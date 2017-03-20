@@ -1,0 +1,11 @@
+.row
+  .col-md-2
+  .col-md-8
+    h4.board-list-title
+      i.glyphicon.glyphicon-blackboard
+      |  Boards
+    - @boards.each do |board|
+      a style='text-decoration: none' href=board_path(board)
+        span.board
+          span.board-title
+            = board.name

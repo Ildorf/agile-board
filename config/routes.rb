@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :boards
+  namespace :api do
+    resources :boards do
+      resources :cards, except: [:new, :edit]
+    end
+  end
+
+  root 'boards#index'
 end

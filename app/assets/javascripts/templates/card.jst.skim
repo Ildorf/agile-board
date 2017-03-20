@@ -1,0 +1,2 @@
+.card id="card_#{@card.id}" draggable="true" 
+  = @card.content

@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+.body {
+}
+
+.agile-board-navbar {
+  color: #ffffff;
+  background-color: #026AA7;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.navbar-brand, .navbar-nav,  {
+  color: #ffffff;
+}
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
