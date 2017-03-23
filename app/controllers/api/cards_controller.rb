@@ -28,9 +28,9 @@ class Api::CardsController < ApplicationController
   def destroy
     if current_user.author?(@card) || current_user.manage?(@board)
       @card.destroy
-      render status: 200, json: ['Card successfully deleted.']
+      render status: 200, plain: 'Card successfully deleted.'
     else
-      render status: :forbidden, json: ["You haven't permission for delete this card."]
+      render status: 403, plain: "You haven't permission for delete this card."
     end
   end
 

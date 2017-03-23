@@ -31,13 +31,13 @@ ready = ->
         $('.alerts').append(JST["templates/error"]({error: error}))
 
       .on 'ajax:success', 'a.delete-card-link', (e, xhr, status, error) ->
-        notice = $.parseJSON(xhr.responseText)
-        alert xhr.responseText
+        notice = xhr.responseText
+        card_id = e.target.dataset.cardId
+        $("#div_card_#{card_id}").remove()
         $('.alerts').append(JST["templates/error"]({notice: notice}))
 
       .on 'ajax:error', 'a.delete-card-link', (e, xhr, status, error) ->
-        error = $.parseJSON(xhr.responseText)
-        alert xhr.responseText
+        error = xhr.responseText
         $('.alerts').append(JST["templates/error"]({error: error}))
 
       .on 'click', '#add-new-card-link', (e) ->

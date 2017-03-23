@@ -21,6 +21,17 @@ ready = ->
         board = $.parseJSON(xhr.responseText)
         $("#div-board-#{board.id}").replaceWith(JST["templates/board"]({board: board}))
 
+      .on 'ajax:error', 'a.delete-board-link', (e, xhr, status, error) ->
+        error = xhr.responseText
+        $('.alerts').append(JST["templates/error"]({error: error}))
+
+      .on 'ajax:success', 'a.delete-board-link', (e, data, status, xhr) ->
+        notice = xhr.responseText
+        $('.alerts').append(JST["templates/notice"]({notice: notice}))
+        board_id = e.target.dataset.boardId
+        $("#div-board-#{board_id}").remove()
+
+
 
       .on 'ajax:error', 'form.edit_board', (e, xhr, status, error) ->
         error = $.parseJSON(xhr.responseText)

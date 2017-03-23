@@ -27,10 +27,9 @@ class Api::BoardsController < ApplicationController
     board = Board.find(params[:id])
     if current_user.manage?(board)
       board.destroy
-      render status: :success
+      render status: 200, plain: 'Card successfully deleted'
     else
-      render status: :forbidden, message: "You haven't permission for delete "/
-                                                                 "this board."
+      render status: 403, plain: "You haven't permission for delete this board."
     end
   end
 
