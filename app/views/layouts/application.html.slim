@@ -3,10 +3,34 @@ html
     title Agile-Board
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    = csrf_meta_tags
   body
     nav.navbar.agile-board-navbar
       .container-fluid
         .navbar-header
           a.navbar-brand href=root_path  AgileBoard
+        ul.nav.navbar-nav.pull-right
+          - if user_signed_in?
+            li
+              a.notifications-link.unread
+                i.glyphicon.glyphicon-asterisk
+            li
+              = link_to 'Log Out', destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to 'Sign Up', new_user_registration_path
     .body
+      .col-md-8
+      .col-md-4
+        .div.alerts
+          - if notice
+            .alert.alert-success.alert-dismissable
+              a.close[href="#" data-dismiss="alert" aria-label="close"]
+                | ×
+              = notice
+          - if alert
+            .alert.alert-info.alert-dismissable
+              a.close[href="#" data-dismiss="alert" aria-label="close"]
+                | ×
+              = alert
       = yield

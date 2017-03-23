@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  resources :boards
+  devise_for :users
+
+  resources :boards, only: [:index, :show]
+
   namespace :api do
-    resources :boards do
-      resources :cards, except: [:new, :edit]
+    resources :boards, only: [:index, :create, :destroy, :update] do
+      resources :cards, except: [:new, :edit] do
+        patch :move, on: :member
+      end
     end
   end
 

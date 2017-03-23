@@ -1,29 +1,30 @@
 class Card < ApplicationRecord
   belongs_to :board
+  belongs_to :user
+  belongs_to :doer, class_name: 'User'
+  has_many :card_marks, dependent: :destroy
 
-  validates :content, :board, presence: true
-
-  # event :accept  do
-  #    transition [:idling, :first_gear] => :parked
-  #  end
+  validates :title, :content, :board, :user, presence: true
+  # 
+  # state_machine :initial => 'idea' do
+  #   event :accept  do
+  #     transition 'idea' => 'to-do'
+  #   end
   #
-  #  event :ignite do
-  #    transition :stalled => same, :parked => :idling
-  #  end
+  #   event :complete do
+  #     transition 'to-do' => 'on-review'
+  #   end
   #
-  #  event :idle do
-  #    transition :first_gear => :idling
-  #  end
+  #   event :commit do
+  #     transition 'on-review' => 'commited'
+  #   end
   #
-  #  event :shift_up do
-  #    transition :idling => :first_gear, :first_gear => :second_gear, :second_gear => :third_gear
-  #  end
+  #   event :refuse do
+  #     transition 'on-review' => 'to-do'
+  #   end
   #
-  #  event :shift_down do
-  #    transition :third_gear => :second_gear, :second_gear => :first_gear
-  #  end
-  #
-  #  event :crash do
-  #    transition all - [:parked, :stalled] => :stalled, :if => lambda {|vehicle| !vehicle.passed_inspection?}
-  #  end
+  #   event :finish do
+  #     transition 'commited' => 'done'
+  #   end
+  # end
 end
