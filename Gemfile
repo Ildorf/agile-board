@@ -21,7 +21,7 @@ gem 'active_model_serializers'
 gem 'skim'
 gem 'devise'
 gem 'state_machine'
-gem 'ruby-graphviz'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'

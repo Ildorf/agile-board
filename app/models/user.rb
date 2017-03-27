@@ -11,7 +11,15 @@ class User < ApplicationRecord
     participation.present? && participation.role == 'manager'
   end
 
-  def author? card
-    id == card.id
+  def author? object
+    id == object.user_id
+  end
+
+  def manage_card? card
+    author?(card) || manage?(card.board)
+  end
+
+  def vote_for card
+    card_marks.where(card_id: card.id).first.try(:id)
   end
 end

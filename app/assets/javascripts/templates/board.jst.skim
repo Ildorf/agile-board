@@ -3,11 +3,10 @@ div id="div-board-#{@board.id}"
     a style='text-decoration: none' href="/boards/#{@board.id}"
       span.board-title
         = @board.name
-    span.board-options
+    span.board-options.pull-right
       - if @board.accessible
-        span
-          a.edit-baord-link data-board-id=@board.id edit
-          a.delete-board-link data-board-id=@board.id data-remote='true' data-confirm="Are you sure?" data-method="delete" href="/api/boards/#{@board.id}"  delete
+        a.edit-baord-link data-board-id=@board.id edit
+        a.delete-board-link data-board-id=@board.id data-remote='true' data-confirm="Are you sure?" data-method="delete" href="/api/boards/#{@board.id}"  delete
   - if @board.accessible
     .board-form style=("display: none;") id="edit-board-from-#{@board.id}"
       a.close-edit-board-form.close data-board-id=@board.id  ×

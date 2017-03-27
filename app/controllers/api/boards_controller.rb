@@ -1,4 +1,6 @@
 class Api::BoardsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     boards = current_user.boards
     render json: boards
@@ -16,6 +18,7 @@ class Api::BoardsController < ApplicationController
 
   def update
     board = Board.find(params[:id])
+    render status: 403 if !current_user.manage?(board)
     if board.update(board_params)
       render json: board
     else
@@ -27,7 +30,7 @@ class Api::BoardsController < ApplicationController
     board = Board.find(params[:id])
     if current_user.manage?(board)
       board.destroy
-      render status: 200, plain: 'Card successfully deleted'
+      render status: 200, plain: 'Board successfully deleted'
     else
       render status: 403, plain: "You haven't permission for delete this board."
     end

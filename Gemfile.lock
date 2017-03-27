@@ -170,7 +170,6 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    ruby-graphviz (1.2.3)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -246,7 +245,6 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails-controller-testing
   rspec-rails
-  ruby-graphviz
   sass-rails (~> 5.0)
   shoulda-matchers
   skim

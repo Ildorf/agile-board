@@ -1,3 +1,15 @@
+#add-user-modal.modal.fade role="dialog"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        a.close data-dismiss="modal" ×
+        h4.modal-title Add user
+      .modal-body
+        = form_for Participation.new, url: api_board_participations_path(@board), remote: true, data: { type: :json } do |f|
+          = f.select :user_id, @users, {}, {class: 'form-control' }
+          = f.select :role, ['developer', 'manager'], {}, {class: 'form-control' }
+          = f.submit 'Add', class: 'btn btn-sm btn-default'
+
 .board-area#board-area data-board-id=@board.id
   .row
   .col-md-2

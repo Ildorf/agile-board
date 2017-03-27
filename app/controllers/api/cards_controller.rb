@@ -18,6 +18,7 @@ class Api::CardsController < ApplicationController
   end
 
   def update
+    render status: 403 if !current_user.manage_card?(@card)
     if @card.update(card_params)
       render json: @card
     else
@@ -26,7 +27,7 @@ class Api::CardsController < ApplicationController
   end
 
   def destroy
-    if current_user.author?(@card) || current_user.manage?(@board)
+    if current_user.manage_card?(@card)
       @card.destroy
       render status: 200, plain: 'Card successfully deleted.'
     else

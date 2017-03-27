@@ -1,5 +1,6 @@
 class CardSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :status, :board_id, :user, :doer, :accessible
+  attributes :id, :title, :content, :status, :board_id, :user, :doer,
+             :accessible, :vote
 
   def user
     object.user.email
@@ -11,5 +12,9 @@ class CardSerializer < ActiveModel::Serializer
 
   def accessible
     object.user_id == current_user.id || current_user.manage?(object.board)
+  end
+
+  def vote
+    current_user.vote_for object
   end
 end

@@ -10,6 +10,30 @@ ready = ->
           $("select[data-card-id='#{cards[i].id}']").append($("form.new_card #card_doer_id")[0].innerHTML)
 
     $(document)
+      .on 'ajax:success', 'a.vote, a.unvote', (e, data, status, xhr) ->
+        card = $.parseJSON(xhr.responseText)
+        $("#vote-card-#{card.id}").html(JST["templates/vote_card"]({card: card}))
+        e.preventDefault()
+
+      .on 'ajax:error', 'a.vote', (e, xhr, status, error) ->
+        alert xhr.responseText
+        error = $.parseJSON(xhr.responseText)
+        $('.alerts').append(JST["templates/error"]({error: error}))
+        e.preventDefault()
+
+      .on 'ajax:success', 'form.new_participation', (e, data, status, xhr) ->
+        user = $.parseJSON(xhr.responseText)
+        notice = "#{user.email} successfully added as #{user.role}"
+        $('#add-user-modal').modal('hide');
+        $('select[name="card[doer_id]"]').append("<option value='#{user.id}'>#{user.email}</option>")
+        $('.alerts').append(JST["templates/notice"]({notice: notice}))
+        e.preventDefault()
+
+      .on 'ajax:error', 'form.new_participation', (e, xhr, status, error) ->
+        error = $.parseJSON(xhr.responseText)
+        $('.alerts').append(JST["templates/error"]({error: error}))
+        e.preventDefault()
+
       .on 'ajax:success', 'form.edit_card', (e, data, status, xhr) ->
         card = $.parseJSON(xhr.responseText)
         $("#div_card_#{card.id}" ).html(JST["templates/card"]({card: card}))

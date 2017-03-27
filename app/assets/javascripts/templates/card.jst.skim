@@ -1,6 +1,7 @@
 div id="div_card_#{@card.id}"
   .card id="card_#{@card.id}" draggable="true" data-card-id=@card.id
     b = @card.title
+    == JST["templates/vote_card"]({card: @card})
     p = @card.content
     p = "from: #{@card.user}"
     p = "to: #{@card.doer}"
