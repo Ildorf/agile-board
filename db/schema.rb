@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170321122034) do
   end
 
 # Could not dump table "cards" because of following StandardError
-#   Unknown type 'status' for column 'status'
+#   Unknown type 'status' for column 'state'
 
 # Could not dump table "participations" because of following StandardError
 #   Unknown type 'role' for column 'role'

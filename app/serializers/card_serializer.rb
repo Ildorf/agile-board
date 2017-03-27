@@ -1,5 +1,5 @@
 class CardSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :status, :board_id, :user, :doer,
+  attributes :id, :title, :content, :state, :board_id, :user, :doer,
              :accessible, :vote
 
   def user

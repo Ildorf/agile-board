@@ -1,13 +1,13 @@
 class CreateParticipations < ActiveRecord::Migration[5.0]
   def up
     execute <<-SQL
-      CREATE TYPE role AS ENUM('member', 'manager')
+      CREATE TYPE role AS ENUM('developer', 'manager')
     SQL
 
     create_table :participations do |t|
       t.references :user, null: false, index: true
       t.references :board, null: false, index: true
-      t.column :role, :role, null: false, default: 'member'
+      t.column :role, :role, null: false, default: 'developer'
 
       t.timestamps
     end

@@ -11,7 +11,7 @@ class CreateCards < ActiveRecord::Migration[5.0]
       t.string :title, null: false
       t.text :content, null: false
       t.references :user, null: false
-      t.column :status, :status, null: false, default: :idea
+      t.column :state, :status, null: false, default: :idea
       t.integer :doer_id
 
       t.timestamps

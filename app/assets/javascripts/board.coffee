@@ -5,7 +5,7 @@ ready = ->
     board_id = document.getElementById('board-area').dataset.boardId
     $.getJSON '/api/boards/' + board_id + '/cards', (cards) ->
       $.each cards, (i) ->
-        $(".cards-area##{cards[i]['status']}").append(JST["templates/card"]({card: cards[i]}))
+        $(".cards-area##{cards[i]['state']}").append(JST["templates/card"]({card: cards[i]}))
         if cards[i].accessible
           $("select[data-card-id='#{cards[i].id}']").append($("form.new_card #card_doer_id")[0].innerHTML)
 
@@ -46,7 +46,7 @@ ready = ->
 
       .on 'ajax:success', 'form.new_card', (e, data, status, xhr) ->
         card = $.parseJSON(xhr.responseText)
-        $(".cards-area##{card['status']}").append(JST["templates/card"]({card: card}))
+        $(".cards-area##{card['state']}").append(JST["templates/card"]({card: card}))
         $('.new-card-form').hide()
         $('#add-new-card-link').show()
 
@@ -88,16 +88,28 @@ ready = ->
 
       .on "drop", ".cards-area", (ev) ->
         ev.preventDefault()
-        data = ev.originalEvent.dataTransfer.getData('text')
-        target = ev.originalEvent.target
-        while target.className != 'cards-area'
-          target = target.parentElement
-        target.appendChild document.getElementById(data)
+        card_id = ev.originalEvent.dataTransfer.getData('card_id')
+        card = ev.originalEvent.dataTransfer.getData('element_id')
+        board_id = document.getElementById('board-area').dataset.boardId
+        to_state = ev.currentTarget.id
+        $.ajax "/api/boards/#{board_id}/cards/#{card_id}/move?to_state=#{to_state}",
+          type: 'PATCH'
+          dataType: 'text'
+          error: (xhr, status, error) ->
+            error = xhr.responseText
+            $('.alerts').append(JST["templates/error"]({error: error}))
+          success: (xhr, status, error) ->
+            target = ev.originalEvent.toElement
+            while target.className != 'cards-area'
+              target = target.parentElement
+            target.append document.getElementById(card)
+
 
       .on "dragover", ".cards-area", (ev) ->
         ev.originalEvent.preventDefault()
 
-      .on "dragstart", ".card", (ev) ->
-        ev.originalEvent.dataTransfer.setData 'text', ev.target.id
+      .on "dragstart", ".card_box", (ev) ->
+        ev.originalEvent.dataTransfer.setData 'element_id', ev.target.id
+        ev.originalEvent.dataTransfer.setData 'card_id', ev.target.dataset.cardId
 
 $(document).on('turbolinks:load', ready);

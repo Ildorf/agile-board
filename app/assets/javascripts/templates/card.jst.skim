@@ -1,5 +1,5 @@
-div id="div_card_#{@card.id}"
-  .card id="card_#{@card.id}" draggable="true" data-card-id=@card.id
+div.card_box id="div_card_#{@card.id}" draggable="true" data-card-id=@card.id
+  .card id="card_#{@card.id}"
     b = @card.title
     == JST["templates/vote_card"]({card: @card})
     p = @card.content
@@ -7,7 +7,7 @@ div id="div_card_#{@card.id}"
     p = "to: #{@card.doer}"
     - if @card.accessible
       span
-        a.edit-card-link data-card-id=@card.id edit
+        a.edit-card-link data-card-id=@card.id edit 
         a.delete-card-link data-card-id=@card.id data-remote='true' data-confirm="Are you sure?" data-method="delete" href="/api/boards/#{@card.board_id}/cards/#{@card.id}" delete
   - if @card.accessible
     .new-card-form id="edit-card-from-#{@card.id}" style='display:none;'

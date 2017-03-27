@@ -36,7 +36,15 @@ class Api::CardsController < ApplicationController
   end
 
   def move
-
+    to_state = params[:to_state]
+    if transition = @card.state_transitions
+                         .find {|s| s.from == @card.state && s.to == to_state }
+      @card.send transition.event
+      render status: 200, plain: 'Card successfully moved'
+    else
+      render status: 400, plain: "Card can't be moved from #{@card.state} to " +
+                                 to_state
+    end
   end
 
   private
