@@ -20,6 +20,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'active_model_serializers'
 gem 'skim'
 gem 'devise'
+gem 'state_machine'
 
 group :development, :test do
   gem 'byebug', platform: :mri

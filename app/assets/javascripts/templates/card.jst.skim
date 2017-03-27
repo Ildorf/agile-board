@@ -1,2 +1,21 @@
-.card id="card_#{@card.id}" draggable="true" 
-  = @card.content
+div.card_box id="div_card_#{@card.id}" draggable="true" data-card-id=@card.id
+  .card id="card_#{@card.id}"
+    b = @card.title
+    == JST["templates/vote_card"]({card: @card})
+    p = @card.content
+    p = "from: #{@card.user}"
+    p = "to: #{@card.doer}"
+    - if @card.accessible
+      span
+        a.edit-card-link data-card-id=@card.id edit 
+        a.delete-card-link data-card-id=@card.id data-remote='true' data-confirm="Are you sure?" data-method="delete" href="/api/boards/#{@card.board_id}/cards/#{@card.id}" delete
+  - if @card.accessible
+    .new-card-form id="edit-card-from-#{@card.id}" style='display:none;'
+      a.close.close-edit-card-link data-card-id=@card.id  ×
+      form.edit_card accept-charset="UTF-8" action="/api/boards/#{@card.board_id}/cards/#{@card.id}" data-remote="true" data-type="json" method="patch" data-card-id=@card.id
+        input name="utf8" type="hidden" value="✓" /
+        .form-group
+          input#card_title.form-control name="card[title]" type="text" value=@card.title
+          textarea#card_content.form-control name="card[content]"  = @card.content
+          select#card_doer_id.form-control name="card[doer_id]" data-card-id=@card.id
+          input.btn.btn-sm.btn-default data-disable-with="Save" name="commit" type="submit" value="Save" /

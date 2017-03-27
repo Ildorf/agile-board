@@ -12,6 +12,7 @@
     top: 0;
     width: 300px;
     padding-top: 10px;
+    margin-bottom: 10px;
     height: 100px;
 }
 
@@ -23,14 +24,30 @@
     font-size: 18;
 }
 
+.board-options {
+    min-height: 60px;
+    padding-right: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18;
+}
+
+.board-options a {
+    font-size: 16;
+    color: #8c8c8c;
+    text-decoration: none;
+}
+
+
 .board-list-title {
   margin-top: 50px;
 }
 
-.boards-area {
+.board-area {
   background-color: #0079bf;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  display: inline-block;
 }
 
 .board-column {
@@ -40,7 +57,6 @@
   margin-bottom: 50px;
   margin-right: 10px;
   border-radius: 4px;
-  min-height: 150px;
 }
 
 .board-column-title {
@@ -74,6 +90,13 @@
   min-height: 130px;
 }
 
+.new-card-form-area {
+  margin-left: 7px;
+  margin-right: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
 .card {
   margin-top: 10px;
   padding-top: 5px;
@@ -83,4 +106,71 @@
   background-color: #ffffff;
   min-height: 60px;
   border-radius: 3px;
+}
+
+.new-board {
+  background-color: #E2E4E6 !important;
+}
+
+.new-board-title {
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  vertical-align: middle;
+  color: #8c8c8c;
+  font-weight: bold;
+  font-size: 16;
+}
+
+.board-form {
+  background-color: #ffffff;
+  border: 1px solid #D6DADC;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 300px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  height: 150px;
+}
+
+.destroy-board {
+  color: #ffffff;
+}
+
+.new-card-form {
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #ffffff;
+  min-height: 120px;
+  border-radius: 3px;
+}
+
+.add-new-card-span {
+  color: #8c8c8c;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-top: 3px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
+.add-new-card-span:hover {
+  background-color: #D6DADC;
+}
+
+.vote {
+  color: #D6DADC;
+}
+
+.unvote {
+  color: gold;
 }

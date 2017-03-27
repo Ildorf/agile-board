@@ -1,0 +1,19 @@
+div id="div-board-#{@board.id}"
+  span.board id="board-#{@board.id}"
+    a style='text-decoration: none' href="/boards/#{@board.id}"
+      span.board-title
+        = @board.name
+    span.board-options.pull-right
+      - if @board.accessible
+        a.edit-baord-link data-board-id=@board.id edit
+        a.delete-board-link data-board-id=@board.id data-remote='true' data-confirm="Are you sure?" data-method="delete" href="/api/boards/#{@board.id}"  delete
+  - if @board.accessible
+    .board-form style=("display: none;") id="edit-board-from-#{@board.id}"
+      a.close-edit-board-form.close data-board-id=@board.id  ×
+      form.edit_board accept-charset="UTF-8" action="/api/boards/#{@board.id}" data-remote="true" data-type="json" method="patch" data-board-id=@board.id
+        input name="utf8" type="hidden" value="✓" /
+        .form-group
+          label for="board_name"  Name
+          input#board_name.form-control name="board[name]" type="text"  value=@board.name
+        .form-group
+          input.btn.btn-sm.btn-default.form-control data-disable-with="Save" name="commit" type="submit" value="Save" /

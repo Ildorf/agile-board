@@ -1,9 +1,33 @@
-.boards-area
+#add-user-modal.modal.fade role="dialog"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        a.close data-dismiss="modal" ×
+        h4.modal-title Add user
+      .modal-body
+        = form_for Participation.new, url: api_board_participations_path(@board), remote: true, data: { type: :json } do |f|
+          = f.select :user_id, @users, {}, {class: 'form-control' }
+          = f.select :role, ['developer', 'manager'], {}, {class: 'form-control' }
+          = f.submit 'Add', class: 'btn btn-sm btn-default'
+
+.board-area#board-area data-board-id=@board.id 
   .row
   .col-md-2
     .board-column
       .board-column-title.ideas Idea
       .cards-area#idea
+      .new-card-form-area
+        .new-card-form#new-card-form style='display:none;'
+          = form_for Card.new, url: api_board_cards_path(@board), remote: true, data: { type: :json } do |f|
+            a.close#close-card-form href="#"
+              | ×
+            .form-group
+              = f.text_field :title, class: 'form-control'
+              = f.text_area :content, class: 'form-control'
+              = f.select :doer_id, @board.users.map {|user| [user.email, user.id] }, {}, {class: 'form-control' }
+              = f.submit 'Add', class: 'btn btn-sm btn-default'
+      a#add-new-card-link href='#' style='text-decoration: none'
+        div.add-new-card-span  Add a card
   .col-md-2
     .board-column
       .board-column-title.to-do To Do

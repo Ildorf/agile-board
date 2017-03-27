@@ -27,7 +27,7 @@
   border-radius: 0px;
 }
 
-.navbar-brand, .navbar-nav,  {
+.navbar-brand, .navbar-nav  {
   color: #ffffff;
 }
 
@@ -38,4 +38,27 @@
     left: 0;
     text-align: center;
     margin:0 auto;
+}
+
+.alerts {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  width: 90%;
+  z-index: 1;
+}
+
+.session {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.icon-link {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18;
+}
+
+.unread {
+  color: #EB5A46 !important;
 }

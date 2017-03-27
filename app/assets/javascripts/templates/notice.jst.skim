@@ -1,0 +1,4 @@
+.alert.alert-success.alert-dismissable
+  a.close[href="#" data-dismiss="alert" aria-label="close"]
+    | ×
+  = @notice

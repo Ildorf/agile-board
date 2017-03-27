@@ -1,0 +1,4 @@
+.alert.alert-danger.alert-dismissable
+  a.close[href="#" data-dismiss="alert" aria-label="close"]
+    | ×
+  = @error

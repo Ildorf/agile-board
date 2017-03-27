@@ -1,0 +1,7 @@
+span.pull-right id="vote-card-#{@card.id}"
+  - if @card.vote
+    a.unvote href="/api/boards/#{@card.board_id}/cards/#{@card.id}/card_marks/#{@card.vote}" data-method="delete" data-remote='true'
+      i.glyphicon.glyphicon-star
+  - else
+    a.vote href="/api/boards/#{@card.board_id}/cards/#{@card.id}/card_marks" data-method="post" data-remote='true'
+      i.glyphicon.glyphicon-star

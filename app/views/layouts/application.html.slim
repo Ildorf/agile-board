@@ -3,10 +3,21 @@ html
     title Agile-Board
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    = csrf_meta_tags
   body
-    nav.navbar.agile-board-navbar
-      .container-fluid
-        .navbar-header
-          a.navbar-brand href=root_path  AgileBoard
+    = render 'layouts/header'
     .body
+      .col-md-8
+      .col-md-4
+        .div.alerts
+          - if notice
+            .alert.alert-success.alert-dismissable
+              a.close[href="#" data-dismiss="alert" aria-label="close"]
+                | ×
+              = notice
+          - if alert
+            .alert.alert-info.alert-dismissable
+              a.close[href="#" data-dismiss="alert" aria-label="close"]
+                | ×
+              = alert
       = yield

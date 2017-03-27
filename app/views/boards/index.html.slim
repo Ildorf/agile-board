@@ -4,8 +4,16 @@
     h4.board-list-title
       i.glyphicon.glyphicon-blackboard
       |  Boards
-    - @boards.each do |board|
-      a style='text-decoration: none' href=board_path(board)
-        span.board
-          span.board-title
-            = board.name
+    .boards-list
+    a#new-board-link style='text-decoration: none' href='#'
+      span.board.new-board
+        div.new-board-title Create new board
+    div.board-form#new-bord-form style='display:none;'
+      = form_for Board.new, url: api_boards_path, remote: true, data: { type: :json } do |f|
+        a.close#close-board-form href="#"
+          | ×
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+        .form-group
+          = f.submit 'Create', class: 'btn btn-sm btn-default form-control'
